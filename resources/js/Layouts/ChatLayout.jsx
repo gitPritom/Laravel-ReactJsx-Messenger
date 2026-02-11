@@ -9,7 +9,7 @@ const ChatLayout = ({ children }) => {
     console.log("ChatLayout conversations:", conversations);
     console.log("ChatLayout selectedConversation:", selectedConversation);
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout user={page.props.auth.user}>
             ChatLayout
             <div>
                 {children}
