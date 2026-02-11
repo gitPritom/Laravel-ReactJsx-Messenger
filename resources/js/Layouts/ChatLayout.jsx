@@ -18,5 +18,4 @@ const ChatLayout = ({ children }) => {
     );
 }
 
-
 export default ChatLayout;
