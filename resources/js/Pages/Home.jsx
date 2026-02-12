@@ -11,7 +11,9 @@ function Home({ auth }) {
 
 Home.layout = (page) => {
     return (
+        <AuthenticatedLayout user={page.props.auth.user}>
             <ChatLayout children={page} />
+        </AuthenticatedLayout>
     );
 }
 
