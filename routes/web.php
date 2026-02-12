@@ -12,6 +12,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::controller(HomeController::class)->group(function () {
         Route::get('/', 'home')->name('dashboard');
     });
+
+    Route::get('/user/{user}', function() {
+
+    })->name('chat.user');
+    Route::get('/group/{group}', function() {
+        
+    })->name('chat.group');
 });
 
 
