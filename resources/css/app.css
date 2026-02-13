@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+#app {
+    height: 100vh;
+}
+
+
 .conversation-item .avatar {
     position: relative;
 }
@@ -17,6 +24,7 @@
     border-radius: 50%;
     border: 2px solid #1f2937;
     z-index: 10;
+    outline: 1px;
 }
 
 .conversation-item .avatar.online:before {
