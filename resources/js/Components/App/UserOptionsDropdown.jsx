@@ -1,5 +1,5 @@
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react';
-import { ShieldCheckIcon, EllipsisVerticalIcon, UserIcon } from '@heroicons/react/24/solid';
+import { ShieldCheckIcon, EllipsisVerticalIcon, UserIcon, LockOpenIcon, LockClosedIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';
 import { Fragment } from 'react';
 
