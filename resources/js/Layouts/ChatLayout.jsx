@@ -10,9 +10,12 @@ const ChatLayout = ({ children }) => {
     const selectedConversation = page.props.selectedConversation;
     const [localConversations, setLocalConversations] = useState([]);
     const [sortedConversations, setSortedConversations] = useState([]);
-    const [onlineUsers, setOnlineUsers] = useState([]);
+    const [onlineUsers, setOnlineUsers] = useState({});
 
-    const isUserOnline = (userId) => onlineUsers[userId];
+    const isUserOnline = (userId) => {
+        if (!onlineUsers || typeof onlineUsers !== 'object') return false;
+        return !!onlineUsers[userId];
+    };
 
     // console.log("Conversations in ChatLayout:", conversations);
     // console.log("Selected Conversation in ChatLayout:", selectedConversation);
@@ -79,9 +82,9 @@ const ChatLayout = ({ children }) => {
             .joining((user) => {
                 setOnlineUsers((prevOnlineUsers) => {
                     const updateUsers = { ...prevOnlineUsers };
+                    updateUsers[user.id] = user;
+                    return updateUsers;
                 });
-                updateUsers[user.id] = user;
-                return updateUsers;
             })
             .leaving((user) => {
                 setOnlineUsers((prevOnlineUsers) => {
@@ -132,7 +135,7 @@ const ChatLayout = ({ children }) => {
                             <ConversationItem
                                 key={`${conversation.is_group ? 'group' : 'user_'}${conversation.id}`}
                                 conversation={conversation}
-                                online={!!isUserOnline(conversation.id)}
+                                online={!conversation.is_group && isUserOnline(conversation.id)}
                                 selectedConversation={selectedConversation}
                             />
                         ))}
