@@ -6,21 +6,19 @@ use App\Events\SocketMessage;
 use App\Http\Requests\StoreMessageRequest;
 use App\Http\Resources\MessageResource;
 use App\Models\{Conversation, Group, Message, MessageAttachment, User};
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Socket;
-
 
 class MessageController extends Controller
 {
     public function byUser(User $user)
     {
+        // Log::info("Auth user :" . auth()->id());
         $messages = Message::where('sender_id', auth()->id())
-            ->where('recevier_id', $user->id)
+            ->where('receiver_id', $user->id)
             ->orWhere('sender_id', $user->id)
-            ->where('recevier_id', auth()->id())
+            ->where('receiver_id', auth()->id())
             ->latest()
             ->paginate(10);
 

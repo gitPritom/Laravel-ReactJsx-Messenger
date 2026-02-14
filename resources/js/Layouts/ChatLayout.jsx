@@ -31,7 +31,6 @@ const ChatLayout = ({ children }) => {
         );
     }
 
-    
     useEffect(() => {
         setSortedConversations(
             localConversations.sort((a, b) => {
