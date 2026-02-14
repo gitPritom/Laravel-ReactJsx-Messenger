@@ -12,6 +12,8 @@ function Home({ messages }) {
     }, [messages]);
 
     return (
+
+        
         <>
             {!messages && (
                 <div className="flex flex-col gap-8 text-center opacity-35 items-center justify-center h-full">
