@@ -6,9 +6,10 @@ import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/solid';
 import { useEffect, useRef, useState } from 'react';
 
 function Home({ selectedConversation = null, messages = null }) {
-    // console.log("Messages: ",messages);
     const [localMessages, setLocalMessages] = useState([]);
     const messagesCtrRef = useRef(null);
+
+    
 
     useEffect(() => {
         setLocalMessages(messages ? messages.data.reverse() : []);

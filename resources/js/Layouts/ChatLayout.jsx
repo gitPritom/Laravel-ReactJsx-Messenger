@@ -16,10 +16,7 @@ const ChatLayout = ({ children }) => {
         if (!onlineUsers || typeof onlineUsers !== 'object') return false;
         return !!onlineUsers[userId];
     };
-
-    // console.log("Conversations in ChatLayout:", conversations);
-    // console.log("Selected Conversation in ChatLayout:", selectedConversation);
-
+    
     const onSearch = (e) => {
         const searchTerm = e.target.value.toLowerCase();
         setLocalConversations(
