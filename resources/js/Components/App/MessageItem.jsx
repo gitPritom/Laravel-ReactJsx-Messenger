@@ -17,7 +17,7 @@ const MessageItem = ({ message }) => {
                 </time>
             </div>
             <div className={"chat-bubble relative " +
-                (message_sender_id === currentUser.id
+                (message.sender_id === currentUser.id
                     ? "chat-bubble-info" : ""
                 )}>
                 <div className="chat-message">

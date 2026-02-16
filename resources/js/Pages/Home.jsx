@@ -28,7 +28,7 @@ function Home({ selectedConversation = null, messages = null }) {
                 <ConversationHeader selectedConversation={selectedConversation} />
                 <div ref={messagesCtrRef} className='flex-1 overflow-y-auto p-5'>
                     {/* Messages */}
-                    {localMessages.length === 0 && (
+                    {localMessages.length > 0 && (
                         <div className="flex flex-col flex ">
                             {localMessages.map((message) => (
                                 <MessageItem key={message.id} message={message} />

@@ -1,5 +1,5 @@
 export const formatMessageDateLong = (date) => {
-    const row = new Date();
+    const now = new Date();
     const inputDate = new Date(date);
 
     if (isToday(inputDate)) {
@@ -21,7 +21,7 @@ export const formatMessageDateLong = (date) => {
 
 
 export const formatMessageDateShort = (date) => {
-    const row = new Date();
+    const now = new Date();
     const inputDate = new Date(date);
 
     if (isToday(inputDate)) {
