@@ -7,9 +7,6 @@ import { Link, usePage } from "@inertiajs/react";
 
 const ConversationHeader = ({ selectedConversation }) => {
     // const page = usePage();
-
-    // console.log("Selected Conversation in ConversationHeader:", selectedConversation);
-    // console.log("Page Props in ConversationHeader:", usePage().props);
     return (
         <>
             {selectedConversation && (
