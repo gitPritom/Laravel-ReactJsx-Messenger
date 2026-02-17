@@ -7,6 +7,9 @@ import { Link, usePage } from "@inertiajs/react";
 
 const ConversationHeader = ({ selectedConversation }) => {
     // const page = usePage();
+
+    // console.log("Selected Conversation in ConversationHeader:", selectedConversation);
+    // console.log("Page Props in ConversationHeader:", usePage().props);
     return (
         <>
             {selectedConversation && (
@@ -24,7 +27,7 @@ const ConversationHeader = ({ selectedConversation }) => {
                             <h3>{selectedConversation.name}</h3>
                             {selectedConversation.is_group && (
                                 <p className="text-xs text-gray-500">
-                                    {selectedConversation.user.length} members
+                                    {selectedConversation.users.length} members
                                 </p>
                             )}
                         </div>
