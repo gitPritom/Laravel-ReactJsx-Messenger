@@ -1,11 +1,45 @@
 import { FaceSmileIcon, HandThumbDownIcon, PaperAirplaneIcon, PaperClipIcon, PhotoIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import NewMessageInput from "./NewMessageInput";
+import axios from "axios";
 
 const MessageInput = ({ conversation = null }) => {
     const [newMessage, setNewMessage] = useState("");
     const [inputErrorMessage, serInputErrorMessage] = useState("");
     const [messageSending, setMessageSending] = useState(false);
+
+    const onSendClick = () => {
+        if (newMessage.trim() === "") {
+            serInputErrorMessage("Please provide a message to send.");
+
+            setTimeout(() => {
+                serInputErrorMessage("");
+            }, 3000);
+            return;
+        }
+        const formData = new FormData();
+        formData.append("message", newMessage);
+        if (conversation.is_group) {
+            formData.append("group_id", conversation.id);
+        } else if (conversation.is_user) {
+            formData.append("receiver_id", conversation.id);
+        }
+
+        setMessageSending(true);
+        axios.post(route("message.store"), formData, {
+            onUploadProgress: (progressEvent) => {
+                const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+                // You can use this progress value to show a progress bar or indicator
+                console.log("Upload Progress: " + progress + "%");
+            }
+        }).then((response) => {
+            setNewMessage("");
+            setMessageSending(false);
+        }).catch((error) => {
+            setMessageSending(false);
+            serInputErrorMessage("Failed to send message. Please try again.");
+        });
+    };
 
     return (
         <div className="flex flex-wrap items-start border-t border-gray-700 py-3">
@@ -29,8 +63,9 @@ const MessageInput = ({ conversation = null }) => {
                     <NewMessageInput
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
+                        onSend={onSendClick}
                     />
-                    <button className="btn btn-info rounded-1-none">
+                    <button onClick={onSendClick} className="btn btn-info rounded-1-none">
                         {messageSending && (
                             <span className="loading loading-spinner loading-xs"></span>
                         )}
@@ -43,12 +78,12 @@ const MessageInput = ({ conversation = null }) => {
                 )}
             </div>
             <div className="order-3 xs:order-3 p-2 flex">
-              <button className="p-1 text-gray-400 hover:text-gray-300">
+                <button className="p-1 text-gray-400 hover:text-gray-300">
                     <FaceSmileIcon className="w-6 h-6" />
-              </button>
-              <button className="p-1 text-gray-400 hover:text-gray-300">
+                </button>
+                <button className="p-1 text-gray-400 hover:text-gray-300">
                     <HandThumbDownIcon className="w-6 h-6" />
-              </button>
+                </button>
             </div>
         </div>
     );

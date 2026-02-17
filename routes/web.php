@@ -14,7 +14,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', 'home')->name('dashboard');
     });
 
-
     Route::controller(MessageController::class)->group(function () {
         Route::get('/user/{user}', 'byUser')->name('chat.user');
         Route::get('/group/{group}', 'byGroup')->name('chat.group');
