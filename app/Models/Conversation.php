@@ -46,7 +46,7 @@ class Conversation extends Model
         }));
     }
 
-    public function updateConversationWithMessage($userId1, $userId2, $message)
+    public static function updateConversationWithMessage($userId1, $userId2, $message)
     {
         // Find conversation, by user_id1 and user_id2 and update last message id
         $conversation = Conversation::where(function ($query) use ($userId1, $userId2) {
