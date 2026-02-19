@@ -4,7 +4,7 @@ import NewMessageInput from "./NewMessageInput";
 import axios from "axios";
 import EmojiPicker from "emoji-picker-react";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
-import { isImage } from "@/helpers";
+import { isImage, isAudio } from "@/helpers";
 
 
 const MessageInput = ({ conversation = null }) => {
