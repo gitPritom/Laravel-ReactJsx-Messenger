@@ -9,6 +9,7 @@ const MessageInput = ({ conversation = null }) => {
     const [messageSending, setMessageSending] = useState(false);
 
     const onSendClick = () => {
+        if (messageSending) { return };
         if (newMessage.trim() === "") {
             serInputErrorMessage("Please provide a message to send.");
 
@@ -65,10 +66,12 @@ const MessageInput = ({ conversation = null }) => {
                         onChange={(e) => setNewMessage(e.target.value)}
                         onSend={onSendClick}
                     />
-                    <button onClick={onSendClick} className="btn btn-info rounded-1-none">
-                        {messageSending && (
+                    <button onClick={onSendClick}
+                        disabled={messageSending}
+                        className="btn btn-info rounded-1-none">
+                        {/* {messageSending && (
                             <span className="loading loading-spinner loading-xs"></span>
-                        )}
+                        )} */}
                         <PaperAirplaneIcon className="w-6" />
                         <span className="hidden sm:inline">Send</span>
                     </button>

@@ -32,6 +32,9 @@ function Home({ selectedConversation = null, messages = null }) {
     };
 
     const loadMoreMessages = useCallback(() => {
+        if (noMoreMessages) {
+            return;
+        }
         // Find the first message object
         const firstMessage = localMessages[0];
         axios.get(route("message.loadOlder", firstMessage.id))
@@ -53,7 +56,7 @@ function Home({ selectedConversation = null, messages = null }) {
                     return [...data.data.reverse(), ...prevMessages];
                 });
             });
-    }, [localMessages]);
+    }, [localMessages, noMoreMessages]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -61,8 +64,10 @@ function Home({ selectedConversation = null, messages = null }) {
                 messagesCtrRef.current.scrollTop = messagesCtrRef.current.scrollHeight;
             }
         }, 10);
-
         const offCreated = on('message.created', messageCreated);
+
+        setScrollFromBottom(0);
+        setNoMoreMessages(false);
         return () => {
             offCreated();
         };
