@@ -8,6 +8,14 @@
     height: 100vh;
 }
 
+.EmojiPickerReact.epr-dark-theme {
+    background-color: theme('colors.gray.800');
+}
+
+.EmojiPickerReact.epr-dark-theme .epr-emoji-category-label {
+    background-color: theme('colors.gray.800');
+}
+
 
 .conversation-item .avatar {
     position: relative;
@@ -117,4 +125,3 @@
 .chat-message-content pre code {
     background-color: transparent;
 }
-

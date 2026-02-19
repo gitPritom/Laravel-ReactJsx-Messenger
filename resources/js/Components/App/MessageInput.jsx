@@ -1,4 +1,4 @@
-import { FaceSmileIcon, HandThumbDownIcon, PaperAirplaneIcon, PaperClipIcon, PhotoIcon } from "@heroicons/react/24/solid";
+import { FaceSmileIcon, HandThumbUpIcon, PaperAirplaneIcon, PaperClipIcon, PhotoIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import NewMessageInput from "./NewMessageInput";
 import axios from "axios";
@@ -43,6 +43,20 @@ const MessageInput = ({ conversation = null }) => {
             setMessageSending(false);
             serInputErrorMessage("Failed to send message. Please try again.");
         });
+    };
+
+    const onLikeClick = () => {
+        if (messageSending) { return; }
+
+        const data = {
+            message: "👍",
+        }
+        if (conversation.is_group) {
+            data["group_id"] = conversation.id;
+        } else if (conversation.is_user) {
+            data["receiver_id"] = conversation.id;
+        }
+        axios.post(route("message.store"), data);
     };
 
     return (
@@ -93,8 +107,8 @@ const MessageInput = ({ conversation = null }) => {
                         </EmojiPicker>
                     </PopoverPanel>
                 </Popover>
-                <button className="p-1 text-gray-400 hover:text-gray-300">
-                    <HandThumbDownIcon className="w-6 h-6" />
+                <button onClick={onLikeClick} className="p-1 text-gray-400 hover:text-gray-300">
+                    <HandThumbUpIcon className="w-6 h-6" />
                 </button>
             </div>
         </div>
