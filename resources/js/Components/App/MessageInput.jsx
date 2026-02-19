@@ -2,6 +2,9 @@ import { FaceSmileIcon, HandThumbDownIcon, PaperAirplaneIcon, PaperClipIcon, Pho
 import { useState } from "react";
 import NewMessageInput from "./NewMessageInput";
 import axios from "axios";
+import EmojiPicker from "emoji-picker-react";
+import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
+
 
 const MessageInput = ({ conversation = null }) => {
     const [newMessage, setNewMessage] = useState("");
@@ -31,7 +34,7 @@ const MessageInput = ({ conversation = null }) => {
             onUploadProgress: (progressEvent) => {
                 const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
                 // You can use this progress value to show a progress bar or indicator
-                console.log("Upload Progress: " + progress + "%");
+                // console.log("Upload Progress: " + progress + "%");
             }
         }).then((response) => {
             setNewMessage("");
@@ -81,9 +84,15 @@ const MessageInput = ({ conversation = null }) => {
                 )}
             </div>
             <div className="order-3 xs:order-3 p-2 flex">
-                <button className="p-1 text-gray-400 hover:text-gray-300">
-                    <FaceSmileIcon className="w-6 h-6" />
-                </button>
+                <Popover className="relative">
+                    <PopoverButton className="p-1 text-gray-400 hover:text-gray-300">
+                        <FaceSmileIcon className="w-6 h-6" />
+                    </PopoverButton>
+                    <PopoverPanel className="absolute z-10 right-0 bottom-full">
+                        <EmojiPicker theme="dark" onEmojiClick={(e) => setNewMessage(newMessage + e.emoji)}>
+                        </EmojiPicker>
+                    </PopoverPanel>
+                </Popover>
                 <button className="p-1 text-gray-400 hover:text-gray-300">
                     <HandThumbDownIcon className="w-6 h-6" />
                 </button>
