@@ -13,6 +13,8 @@ function Home({ selectedConversation = null, messages = null }) {
     const [noMoreMessages, setNoMoreMessages] = useState(false);
     const [scrollFromBottom, setScrollFromBottom] = useState(0);
     const messagesCtrRef = useRef(null);
+    const [showAttachmentPreview, setShowAttachmentPreview] = useState(false);
+    const [previewAttachment, setPreviewAttachment,] = useState({});
     const loadMoreIntersect = useRef(null);
     const { on } = useEventBus();
 
@@ -109,6 +111,14 @@ function Home({ selectedConversation = null, messages = null }) {
         }
     }, [localMessages]);
 
+    const onAttachmentClick = (attachments, ind) => {
+        setPreviewAttachment({
+            attachments,
+            ind
+        });
+        setShowAttachmentPreview(true);
+    };
+
     return (
         <>
             {!messages && (
@@ -134,8 +144,16 @@ function Home({ selectedConversation = null, messages = null }) {
                         </div>)}
                 </div>
                 <MessageInput conversation={selectedConversation} />
-            </>)
-            }
+            </>
+            )}
+            {previewAttachment.attachments && (
+                <AttachmentPreviewModal
+                    attachments={previewAttachment.attachments}
+                    index={previewAttachment.ind}
+                    show={showAttachmentPreview}
+                    onClose={() => setShowAttachmentPreview(false)}
+                />
+            )}
         </>
     );
 }
