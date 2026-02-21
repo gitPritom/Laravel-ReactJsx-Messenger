@@ -2,6 +2,8 @@ import { isAudio, isPreviewable } from "@/helpers";
 import { PaperClipIcon, PlayCircleIcon } from "@heroicons/react/24/solid";
 
 
+
+//Message attachment 
 const MessageAttachments = ({ attachments, attachmentClick }) => {
     return (
         <>
