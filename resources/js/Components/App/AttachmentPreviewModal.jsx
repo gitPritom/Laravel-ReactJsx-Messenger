@@ -3,8 +3,6 @@ import { Dialog, DialogPanel, Transition, TransitionChild } from "@headlessui/re
 import { ChevronLeftIcon, ChevronRightIcon, PaperClipIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { Fragment, useEffect, useMemo, useState } from "react";
 
-
-
 export default function AttachmentPreviewModal({
     attachment,
     index,
