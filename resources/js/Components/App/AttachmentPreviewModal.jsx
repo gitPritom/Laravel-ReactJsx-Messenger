@@ -4,7 +4,7 @@ import { ChevronLeftIcon, ChevronRightIcon, PaperClipIcon, XMarkIcon } from "@he
 import { Fragment, useEffect, useMemo, useState } from "react";
 
 export default function AttachmentPreviewModal({
-    attachment,
+    attachments,
     index,
     show = false,
     onClose = () => { },

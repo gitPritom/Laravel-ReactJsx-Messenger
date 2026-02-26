@@ -136,7 +136,7 @@ const MessageInput = ({ conversation = null }) => {
                     <p className="text-xs text-red-400">{inputErrorMessage}</p>
                 )}
                 <div className="flex flex-wrap gap-1 mt-2">
-                    {chosenFiles.map((file) => {
+                    {chosenFiles.map((file) => (
                         <div key={file.file.name} className={
                             `relative flex justify-between cursor-pointer ` +
                             (!isImage(file.file) ? " w-[240px]" : "")
@@ -159,9 +159,7 @@ const MessageInput = ({ conversation = null }) => {
                                 onClick={() =>
                                     setChosenFiles(
                                         chosenFiles.filter(
-                                            (f) => {
-                                                f.file.name !== file.file.name
-                                            }
+                                            (f) => f.file.name !== file.file.name
                                         )
                                     )
                                 }
@@ -171,7 +169,7 @@ const MessageInput = ({ conversation = null }) => {
                                 <XCircleIcon className="w-6" />
                             </button>
                         </div>
-                    })}
+                    ))}
                 </div>
             </div>
             <div className="order-3 xs:order-3 p-2 flex">
